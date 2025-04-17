@@ -2,10 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\Categories;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
+use Illuminate\Support\Str;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -17,7 +19,11 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create([
             'name' => 'Test User',
-            'email' => 'test@example.com',
+            'email' => Str::random(5).'@example.com',
         ]);
+        Categories::factory(20)->create([
+             'name'=> Str::random(10),
+        'user_id'=> 2]
+        );
     }
 }

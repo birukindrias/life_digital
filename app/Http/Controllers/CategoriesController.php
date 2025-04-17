@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorecategoriesRequest;
 use App\Http\Requests\UpdatecategoriesRequest;
-use App\Models\categories;
+use App\Models\Categories;
 
 class CategoriesController extends Controller
 {
@@ -13,7 +13,8 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        //
+        /*dd( Categories::all());*/
+        return view('dashboard',[    'categories' => Categories::all()]);
     }
 
     /**
@@ -29,7 +30,12 @@ class CategoriesController extends Controller
      */
     public function store(StorecategoriesRequest $request)
     {
-        //
+        $categories = new  Categories();
+        $categories->name = $request->get('name');
+        $categories->user_id = auth()->user;
+        $categories->save();
+        dd($categories::all());
+
     }
 
     /**
